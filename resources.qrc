@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>spectrum_sorted.ico</file>
+    </qresource>
+</RCC>
