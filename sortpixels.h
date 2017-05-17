@@ -1,7 +1,7 @@
 #ifndef SORTPIXELS_H
 #define SORTPIXELS_H
 
-#include <QMainWindow>
+#include <QObject>
 
 class sortpixels : public QObject
 {
