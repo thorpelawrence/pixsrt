@@ -36,3 +36,5 @@ RC_FILE = icon.rc
 
 RESOURCES += \
     resources.qrc
+
+INSTALLS += target

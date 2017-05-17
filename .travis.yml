@@ -9,7 +9,7 @@ before_install:
     
 install: 
     - sudo apt-get -y install qt58base
-    - source /opt/qt58/bin/qt58-env.sh
+    - source /opt/qt*/bin/qt*-env.sh
 
 script:
   - qmake PREFIX=/usr
@@ -20,7 +20,7 @@ after_success:
   - wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" 
   - chmod a+x linuxdeployqt*.AppImage
   - unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH
-  - ./linuxdeployqt*.AppImage ./appdir/usr/share/applications/SortPixels_Qt -bundle-non-qt-libs
-  - ./linuxdeployqt*.AppImage ./appdir/usr/share/applications/SortPixels_Qt -appimage
+  - ./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -bundle-non-qt-libs
+  - ./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -appimage
   - find ./appdir -executable -type f -exec ldd {} \; | grep " => /usr" | cut -d " " -f 2-3 | sort | uniq
   - curl --upload-file ./APPNAME*.AppImage https://transfer.sh/SortPixels_Qt-git.$(git rev-parse --short HEAD)-x86_64.AppImage
