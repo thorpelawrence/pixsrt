@@ -37,4 +37,20 @@ RC_FILE = icon.rc
 RESOURCES += \
     resources.qrc
 
+unix {
+    isEmpty(PREFIX) {
+        PREFIX = /usr/local
+    }
+
+    target.path = $$PREFIX/bin
+
+    shortcutfiles.files = SortPixels_Qt.Desktop
+    shortcutfiles.path = $$PREFIX/share/applications/
+    data.files += spectrum_sorted.png
+    data.path = $$PREFIX/share/pixmaps
+
+    INSTALLS += shortcutfiles
+    INSTALLS += data
+}
+
 INSTALLS += target
