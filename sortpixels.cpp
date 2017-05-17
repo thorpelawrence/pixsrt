@@ -9,7 +9,7 @@ sortpixels::sortpixels(Mode sortMode, QImage *image, double edgeThreshold, int b
     this->brightnessValue = brightnessValue;
 }
 
-bool colorBrightnessLessThan(QRgb &c1, QRgb &c2) {
+bool colorBrightnessLessThan(const QRgb &c1, const QRgb &c2) {
     int maxC1 = qMax(qRed(c1), qMax(qGreen(c1), qBlue(c1)));
     int maxC2 = qMax(qRed(c2), qMax(qGreen(c2), qBlue(c2)));
     return maxC1 < maxC2;
