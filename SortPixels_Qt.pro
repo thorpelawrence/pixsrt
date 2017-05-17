@@ -51,6 +51,6 @@ unix {
 
     INSTALLS += shortcutfiles
     INSTALLS += data
-}
 
-INSTALLS += target
+    INSTALLS += target
+}

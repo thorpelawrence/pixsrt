@@ -23,4 +23,4 @@ after_success:
   - ./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -bundle-non-qt-libs
   - ./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -appimage
   - find ./appdir -executable -type f -exec ldd {} \; | grep " => /usr" | cut -d " " -f 2-3 | sort | uniq
-  - curl --upload-file ./APPNAME*.AppImage https://transfer.sh/SortPixels_Qt-git.$(git rev-parse --short HEAD)-x86_64.AppImage
+  - curl --upload-file ./SortPixels_Qt*.AppImage https://transfer.sh/SortPixels_Qt-git.$(git rev-parse --short HEAD)-x86_64.AppImage
