@@ -22,7 +22,7 @@ build_script:
 
 after_build:
   - 7z a SortPixels-continuous-%BUILD%.zip release
-  - ps: Push-AppveyorArtifact SortPixels-continuous-%BUILD%.zip
+  - appveyor PushArtifact SortPixels-continuous-%BUILD%.zip
 
 deploy:
   tag: continuous
