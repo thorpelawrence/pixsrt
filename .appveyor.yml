@@ -22,3 +22,13 @@ build_script:
 
 artifacts:
   - path: release
+
+deploy:
+  tag: continuous
+  force_update: true
+  release: $(BUILD)-continuous
+  description: $(APPVEYOR_REPO_COMMIT_MESSAGE)
+  provider: GitHub
+  auth_token:
+    secure: XHnnMTnDQkbvkyDieJI/yTD3BiPUsTLyI2SolnlWmjO/5EguoGSe9YgtHs1VCvQh
+  artifact: release.zip
