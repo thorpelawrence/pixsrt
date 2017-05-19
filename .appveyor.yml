@@ -1,0 +1,5 @@
+install:
+  - set QTDIR=C:\Qt\5.8\msvc2015_64
+build_script:
+  - qmake SortPixels_Qt.pro
+  - nmake
