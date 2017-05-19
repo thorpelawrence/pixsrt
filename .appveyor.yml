@@ -6,15 +6,18 @@ environment:
       QTDIR: C:\Qt\5.8\msvc2015
     - BUILD: msvc2015_64
       QTDIR: C:\Qt\5.8\msvc2015_64
+    - BUILD: mingw53_32
+      QTDIR: C:\Qt\5.8\mingw53_32
 
 before_build:
   - if "%BUILD%" == "msvc2015" call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"
   - if "%BUILD%" == "msvc2015_64" call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
+  - if "%BUILD%" == "mingw53_32" set PATH=%PATH%;C:\MinGW\bin
   - set PATH=%PATH%;%QTDIR%\bin;C:\Qt\Tools\QtCreator\bin
   
 build_script:
   - qmake SortPixels_Qt.pro
-  - jom
+  - IF NOT "%BUILD%" == "mingw53_32" (mingw32-make) ELSE (jom)
   - windeployqt .\release\SortPixels_Qt.exe
 
 artifacts:
