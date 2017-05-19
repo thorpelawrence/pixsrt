@@ -26,4 +26,6 @@ after_success:
   - mv ./SortPixels_Qt*.AppImage ./SortPixels-continuous-gcc-64.AppImage
   - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
   - sed -i -e 's/RELEASE_NAME="continuous"/RELEASE_NAME="continuous-linux"/g' ./upload.sh
+  - sed -i -e 's/$BODY//g' ./upload.sh
+  - sed -i -e 's/"prerelease"\: true/"prerelease"\: false/g'
   - bash ./upload.sh ./SortPixels-continuous-gcc-64.AppImage
