@@ -17,7 +17,7 @@ before_build:
   
 build_script:
   - qmake SortPixels_Qt.pro
-  - jom
+  - IF NOT "%BUILD%" == "mingw53_32" (jom) ELSE (mingw32-make)
   - windeployqt .\release\SortPixels_Qt.exe
 
 artifacts:
