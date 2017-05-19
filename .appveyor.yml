@@ -7,4 +7,4 @@ init:
   
 build_script:
   - qmake SortPixels_Qt.pro
-  - nmake
+  - jom
