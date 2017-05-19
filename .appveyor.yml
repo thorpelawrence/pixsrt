@@ -27,7 +27,7 @@ after_build:
 deploy:
   tag: continuous
   force_update: true
-  release: $(BUILD)-continuous
+  release: continuous
   description: $(APPVEYOR_REPO_COMMIT_MESSAGE)
   provider: GitHub
   auth_token:
