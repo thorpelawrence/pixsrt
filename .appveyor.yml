@@ -20,8 +20,9 @@ build_script:
   - IF NOT "%BUILD%" == "mingw53_32" (jom) ELSE (mingw32-make)
   - windeployqt .\release\SortPixels_Qt.exe
 
-artifacts:
-  - path: release
+after_build:
+  - 7z a SortPixels-continuous-%BUILD%.zip release
+  - ps: Push-AppveyorArtifact SortPixels-continuous-%BUILD%.zip
 
 deploy:
   tag: continuous
@@ -31,4 +32,4 @@ deploy:
   provider: GitHub
   auth_token:
     secure: XHnnMTnDQkbvkyDieJI/yTD3BiPUsTLyI2SolnlWmjO/5EguoGSe9YgtHs1VCvQh
-  artifact: release.zip
+  artifact: SortPixels-continuous-%BUILD%.zip
