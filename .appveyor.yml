@@ -10,5 +10,5 @@ build_script:
   - jom
   - windeployqt .\release\SortPixels_Qt.exe
 
-deploy_script:
-  - invoke-webrequest -method put -inline .\release\SortPixels_Qt.exe
+artifacts:
+  - path: release
