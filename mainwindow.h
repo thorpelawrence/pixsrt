@@ -39,6 +39,12 @@ private slots:
 
     void on_actionSave_triggered();
 
+    void on_action_About_SortPixels_triggered();
+
+    void on_actionAbout_Qt_triggered();
+
+    void on_actionExit_triggered();
+
 private:
     Ui::MainWindow *ui;
 

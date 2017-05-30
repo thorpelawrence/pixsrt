@@ -32,6 +32,8 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui
 
+clang:CONFIG += c++11
+
 RC_FILE = icon.rc
 
 RESOURCES += \

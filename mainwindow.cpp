@@ -107,3 +107,40 @@ void MainWindow::on_actionSave_triggered()
     }
     else ui->statusBar->showMessage("No image to save");
 }
+
+void MainWindow::on_action_About_SortPixels_triggered()
+{
+    QString compiler = "Unknown compiler";
+#ifdef Q_PROCESSOR_X86_64
+#ifdef _MSC_VER
+    compiler = "MSVC " + QString(_MSC_VER) + ", 64 bit";
+#elif __MINGW32__
+    compiler == "MinGW " + QString(__MINGW32_MAJOR_VERSION) + "." + QString(__MINGW32_MINOR_VERSION) + ", 64 bit";
+#elif __clang__
+    compiler = "Clang " + QString(__clang_version__) + ", 64 bit";
+#elif __GNUC__
+    compiler = "GCC " + QString(__VERSION__) + ", 64 bit";
+#endif
+#elif Q_PROCESSOR_X86
+#ifdef _MSC_VER
+    compiler = "MSVC " + QString(_MSC_VER) + ", 32 bit";
+#elif __MINGW32__
+    compiler == "MinGW " + QString(__MINGW32_MAJOR_VERSION) + "." + QString(__MINGW32_MINOR_VERSION) + ", 32 bit";
+#elif __clang__
+    compiler = "Clang " + QString(__clang_version__) + ", 32 bit";
+#elif __GNUC__
+    compiler = "GCC " + QString(__VERSION__) + ", 32 bit";
+#endif
+#endif
+    QMessageBox::about(this, "About SortPixels", QString("Built with Qt %1 (%2)\n\nLawrence Thorpe").arg(QT_VERSION_STR).arg(compiler));
+}
+
+void MainWindow::on_actionAbout_Qt_triggered()
+{
+    QMessageBox::aboutQt(this);
+}
+
+void MainWindow::on_actionExit_triggered()
+{
+    close();
+}
