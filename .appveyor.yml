@@ -21,8 +21,8 @@ build_script:
   - windeployqt .\release\SortPixels_Qt.exe
 
 after_build:
-  - 7z a SortPixels-continuous-%BUILD%.zip release
-  - appveyor PushArtifact SortPixels-continuous-%BUILD%.zip
+  - 7z a SortPixels-%APPVEYOR_REPO_TAG_NAME%-%BUILD%.zip .\release\*
+  - appveyor PushArtifact SortPixels-%APPVEYOR_REPO_TAG_NAME%-%BUILD%.zip
 
 deploy:
   force_update: true
@@ -31,6 +31,6 @@ deploy:
   provider: GitHub
   auth_token:
     secure: XHnnMTnDQkbvkyDieJI/yTD3BiPUsTLyI2SolnlWmjO/5EguoGSe9YgtHs1VCvQh
-  artifact: SortPixels-continuous-%BUILD%.zip
+  artifact: SortPixels-%APPVEYOR_REPO_TAG_NAME%-%BUILD%.zip
   on:
     appveyor_repo_tag: true
