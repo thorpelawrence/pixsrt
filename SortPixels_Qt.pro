@@ -12,13 +12,14 @@ TARGET = SortPixels_Qt
 TEMPLATE = app
 
 TAG = "untagged"
+APPVEYOR_TAG = $$(APPVEYOR_REPO_TAG_NAME)
+TRAVIS_TAG = $$(TRAVIS_TAG)
 
-!isEmpty($$(APPVEYOR_REPO_TAG_NAME)) {
-    TAG = $$(APPVEYOR_REPO_TAG_NAME)
+!isEmpty(APPVEYOR_TAG) {
+    TAG = $$APPVEYOR_TAG
 }
-
-!isEmpty($$(TRAVIS_TAG)) {
-    TAG = $$(TRAVIS_TAG)
+!isEmpty(TRAVIS_TAG) {
+    TAG = $$TRAVIS_TAG
 }
 
 DEFINES += TAG=\\\"$$TAG\\\"
