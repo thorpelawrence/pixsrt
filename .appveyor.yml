@@ -25,9 +25,8 @@ after_build:
   - appveyor PushArtifact SortPixels-continuous-%BUILD%.zip
 
 deploy:
-  tag: continuous
   force_update: true
-  release: continuous
+  release: $(appveyor_repo_tag_name)
   description: ''
   provider: GitHub
   auth_token:
