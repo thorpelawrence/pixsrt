@@ -113,7 +113,7 @@ void MainWindow::on_action_About_SortPixels_triggered()
     QString compiler = "Unknown compiler";
 #ifdef Q_PROCESSOR_X86_64
 #ifdef _MSC_VER
-    compiler = QString("MSVC %1, 64 bit").arg(_MSC_BUILD);
+    compiler = QString("MSVC %1, 64 bit").arg(_MSC_VER);
 #elif __MINGW32__
     compiler = QString("MinGW %1.%2, 64 bit").arg(__MINGW32_MAJOR_VERSION).arg(__MINGW32_MINOR_VERSION)
 #elif __clang__
@@ -123,7 +123,7 @@ void MainWindow::on_action_About_SortPixels_triggered()
 #endif
 #elif Q_PROCESSOR_X86
 #ifdef _MSC_VER
-    compiler = QString("MSVC %1, 32 bit").arg(_MSC_BUILD);
+    compiler = QString("MSVC %1, 32 bit").arg(_MSC_VER);
 #elif __MINGW32__
     compiler = QString("MinGW %1.%2, 32 bit").arg(__MINGW32_MAJOR_VERSION).arg(__MINGW32_MINOR_VERSION);
 #elif __clang__
