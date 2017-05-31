@@ -132,7 +132,9 @@ void MainWindow::on_action_About_SortPixels_triggered()
     compiler = QString("GCC %1.%2.%3, 32 bit").arg(__GNUC__).arg(__GNUC_MINOR__).arg(__GNUC_PATCHLEVEL__);
 #endif
 #endif
-    QMessageBox::about(this, "About SortPixels", QString("Built with Qt %1 (%2)\n\nLawrence Thorpe").arg(QT_VERSION_STR).arg(compiler));
+    QMessageBox::about(this, "About SortPixels", QString("SortPixels (%1)\
+                                                            \nLawrence Thorpe\
+                                                            \n\nBuilt with Qt %2 (%3)").arg(TAG).arg(QT_VERSION_STR).arg(compiler));
 }
 
 void MainWindow::on_actionAbout_Qt_triggered()
