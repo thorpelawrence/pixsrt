@@ -127,9 +127,9 @@ void MainWindow::on_action_About_SortPixels_triggered()
 #elif __MINGW32__
     compiler = QString("MinGW %1.%2, 32 bit").arg(__MINGW32_MAJOR_VERSION).arg(__MINGW32_MINOR_VERSION);
 #elif __clang__
-    compiler = QString("Clang %1, 32 bit").arg(__clang_major__).arg(__clang_minor__).arg(__clang_patchlevel__);
+    compiler = QString("Clang %1.%2.%3, 32 bit").arg(__clang_major__).arg(__clang_minor__).arg(__clang_patchlevel__);
 #elif __GNUC__
-    compiler = QString("GCC %1, 32 bit").arg(__GNUC__).arg(__GNUC_MINOR__).arg(__GNUC_PATCHLEVEL__);
+    compiler = QString("GCC %1.%2.%3, 32 bit").arg(__GNUC__).arg(__GNUC_MINOR__).arg(__GNUC_PATCHLEVEL__);
 #endif
 #endif
     QMessageBox::about(this, "About SortPixels", QString("Built with Qt %1 (%2)\n\nLawrence Thorpe").arg(QT_VERSION_STR).arg(compiler));
