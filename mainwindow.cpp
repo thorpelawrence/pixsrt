@@ -108,7 +108,7 @@ void MainWindow::on_actionSave_triggered()
     else ui->statusBar->showMessage("No image to save");
 }
 
-void MainWindow::on_action_About_SortPixels_triggered()
+void MainWindow::on_action_About_Pixsrt_triggered()
 {
     QString compiler = "Unknown compiler";
 #ifdef Q_PROCESSOR_X86_64
@@ -132,7 +132,7 @@ void MainWindow::on_action_About_SortPixels_triggered()
     compiler = QString("GCC %1.%2.%3, 32 bit").arg(__GNUC__).arg(__GNUC_MINOR__).arg(__GNUC_PATCHLEVEL__);
 #endif
 #endif
-    QMessageBox::about(this, "About SortPixels", QString("SortPixels (%1)\
+    QMessageBox::about(this, "About Pixsrt", QString("Pixsrt (%1)\
                                                             \nLawrence Thorpe\
                                                             \n\nBuilt with Qt %2 (%3)").arg(TAG).arg(QT_VERSION_STR).arg(compiler));
 }

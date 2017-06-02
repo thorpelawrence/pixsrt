@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = SortPixels_Qt
+TARGET = pixsrt
 TEMPLATE = app
 
 TAG = "0.0.0"
@@ -61,7 +61,7 @@ unix {
 
     target.path = $$PREFIX/bin
 
-    shortcutfiles.files = SortPixels_Qt.Desktop
+    shortcutfiles.files = pixsrt.desktop
     shortcutfiles.path = $$PREFIX/share/applications/
     data.files += spectrum_sorted.png
     data.path = $$PREFIX/share/pixmaps
