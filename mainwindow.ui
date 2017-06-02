@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>SortPixels</string>
+   <string>Pixsrt</string>
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
@@ -104,7 +104,7 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
-    <addaction name="action_About_SortPixels"/>
+    <addaction name="action_About_Pixsrt"/>
     <addaction name="actionAbout_Qt"/>
    </widget>
    <addaction name="menuFile"/>
@@ -161,9 +161,9 @@
     <string>Alt+1</string>
    </property>
   </action>
-  <action name="action_About_SortPixels">
+  <action name="action_About_Pixsrt">
    <property name="text">
-    <string>&amp;About SortPixels...</string>
+    <string>&amp;About Pixsrt...</string>
    </property>
   </action>
   <action name="actionExit">
