@@ -4,5 +4,5 @@ Encoding=UTF-8
 Name=Pixsrt
 Comment=Pixel sorter
 Exec=pixsrt
-Icon=spectrum_sorted
+Icon=pixsrt
 Terminal=False
