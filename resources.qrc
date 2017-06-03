@@ -1,5 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>spectrum_sorted.ico</file>
+        <file>resources/pix.png</file>
     </qresource>
 </RCC>
