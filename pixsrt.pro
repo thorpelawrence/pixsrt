@@ -26,7 +26,7 @@ DEFINES += TAG=\\\"$$TAG\\\"
 
 VERSION = $$TAG
 
-win32:RC_ICONS += "resources/pix.ico"
+win32:RC_ICONS += "resources/pixsrt.ico"
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings
@@ -63,7 +63,7 @@ unix {
 
     shortcutfiles.files = resources/pixsrt.desktop
     shortcutfiles.path = $$PREFIX/share/applications/
-    data.files += resources/pix.png
+    data.files += resources/pixsrt.png
     data.path = $$PREFIX/share/pixmaps
 
     INSTALLS += shortcutfiles
