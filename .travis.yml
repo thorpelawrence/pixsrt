@@ -16,7 +16,7 @@ install:
     - source /opt/qt*/bin/qt*-env.sh
 
 script:
-    - qmake -spec linux-${CC} PREFIX=/usr
+    - if [ "$CC" == "clang" ]; then qmake -spec linux-clang PREFIX=/usr; else qmake PREFIX=/usr; fi
     - make -j$(nproc)
     - make INSTALL_ROOT=appdir install ; find appdir/
 
