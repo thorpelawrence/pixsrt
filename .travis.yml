@@ -25,7 +25,14 @@ after_success:
     - chmod a+x linuxdeployqt*.AppImage
     - unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH
     - ./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -bundle-non-qt-libs
-    - ./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -appimage
+    - cp ./resources/pixsrt.desktop ./appdir
+    - cp ./resources/pixsrt.png ./appdir
+    - wget -c "https://github.com/probonopd/AppImageKit/raw/master/desktopintegration" -O ./appdir/usr/bin/pixsrt.wrapper
+    - chmod a+x ./appdir/usr/bin/pixsrt.wrapper
+    - ( cd ./appdir/ ; rm AppRun ; ln -s ./usr/bin/pixsrt.wrapper AppRun )
+    - wget -c "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
+    - chmod a+x appimagetool-x86_64.AppImage
+    - ./appimagetool-x86_64.AppImage ./appdir/
     - find ./appdir -executable -type f -exec ldd {} \; | grep " => /usr" | cut -d " " -f 2-3 | sort | uniq
     - mv ./Pixsrt*.AppImage ./pixsrt-${TRAVIS_TAG}-${CC}-64.AppImage
     - curl --upload-file ./pixsrt-${TRAVIS_TAG}-${CC}-64.AppImage https://transfer.sh/pixsrt-${TRAVIS_TAG}-${CC}-64.AppImage
