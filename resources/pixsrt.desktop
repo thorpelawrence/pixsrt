@@ -1,8 +1,6 @@
 [Desktop Entry]
 Type=Application
-Encoding=UTF-8
 Name=Pixsrt
 Comment=Pixel sorter
 Exec=pixsrt
 Icon=pixsrt
-Terminal=False
