@@ -27,6 +27,8 @@ after_success:
     - ./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -bundle-non-qt-libs
     - cp ./resources/pixsrt.desktop ./appdir
     - cp ./resources/pixsrt.png ./appdir
+    - mkdir -p ./appdir/usr/share/icons/default/256x256/apps/
+    - cp ./resources/Pixsrt256.png ./appdir/usr/share/icons/default/256x256/apps/Pixsrt.png
     - wget -c "https://github.com/probonopd/AppImageKit/raw/master/desktopintegration" -O ./appdir/usr/bin/pixsrt.wrapper
     - chmod a+x ./appdir/usr/bin/pixsrt.wrapper
     - ( cd ./appdir/ ; rm AppRun ; ln -s ./usr/bin/pixsrt.wrapper AppRun )
