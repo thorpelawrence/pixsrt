@@ -12,4 +12,4 @@ Downloads available from the [releases page](https://github.com/thorpelawrence/p
 ### Credits
 ASDF pixel sorting algorithm: https://github.com/kimasendorf/ASDFPixelSort
 
-![](images/after.png)
+![](screenshots/after.png)
