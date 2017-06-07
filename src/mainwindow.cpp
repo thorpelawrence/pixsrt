@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
 #ifdef Q_OS_WIN
-    QIcon::setThemeName("tango");
+    QIcon::setThemeName("oxygen");
 #endif
     ui->setupUi(this);
     ui->actionUndo->setEnabled(false);
