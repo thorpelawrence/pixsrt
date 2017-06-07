@@ -53,7 +53,7 @@ clang:CONFIG += c++11
 
 RESOURCES += \
     resources.qrc \
-    icons/tango/tango.qrc
+    icons/oxygen/oxygen.qrc
 
 unix {
     isEmpty(PREFIX) {

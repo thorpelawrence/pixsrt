@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
 #ifdef Q_OS_WIN
-    QIcon::setThemeName("tango");
+    QIcon::setThemeName("oxygen");
 #endif
     ui->setupUi(this);
     ui->actionUndo->setEnabled(false);
@@ -148,4 +148,12 @@ void MainWindow::on_actionAbout_Qt_triggered()
 void MainWindow::on_actionExit_triggered()
 {
     close();
+}
+
+void MainWindow::on_actionAbout_Licenses_triggered()
+{
+    QMessageBox licenseMessage(QMessageBox::NoIcon, "About Licenses", "Oxygen Icons:"
+                             "\n    http://www.kde.org/ "
+                             "\n    LGPLv3");
+    licenseMessage.exec();
 }
