@@ -14,7 +14,7 @@
    <string>Pixsrt</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="resources.qrc">
+   <iconset resource="../resources.qrc">
     <normaloff>:/resources/pixsrt.png</normaloff>:/resources/pixsrt.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -179,7 +179,7 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="../resources.qrc"/>
  </resources>
  <connections/>
 </ui>
