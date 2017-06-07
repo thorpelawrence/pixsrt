@@ -5,6 +5,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+#ifdef Q_OS_WIN
+    QIcon::setThemeName("tango");
+#endif
     ui->setupUi(this);
     ui->actionUndo->setEnabled(false);
 }

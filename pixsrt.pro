@@ -52,7 +52,8 @@ FORMS    += src/mainwindow.ui
 clang:CONFIG += c++11
 
 RESOURCES += \
-    resources.qrc
+    resources.qrc \
+    icons/tango/tango.qrc
 
 unix {
     isEmpty(PREFIX) {
