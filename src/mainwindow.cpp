@@ -149,3 +149,11 @@ void MainWindow::on_actionExit_triggered()
 {
     close();
 }
+
+void MainWindow::on_actionAbout_Licenses_triggered()
+{
+    QMessageBox licenseMessage(QMessageBox::NoIcon, "About Licenses", "Oxygen Icons:"
+                             "\n    http://www.kde.org/ "
+                             "\n    LGPLv3");
+    licenseMessage.exec();
+}
