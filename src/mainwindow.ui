@@ -202,7 +202,7 @@
   </action>
   <action name="actionAbout_Licenses">
    <property name="text">
-    <string>About Licenses</string>
+    <string>About &amp;Licenses...</string>
    </property>
    <property name="toolTip">
     <string>About &amp;Licenses</string>
