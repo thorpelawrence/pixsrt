@@ -40,14 +40,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 
-SOURCES += main.cpp\
-        mainwindow.cpp \
-    sortpixels.cpp
+SOURCES += src/main.cpp\
+        src/mainwindow.cpp \
+    src/sortpixels.cpp
 
-HEADERS  += mainwindow.h \
-    sortpixels.h
+HEADERS  += src/mainwindow.h \
+    src/sortpixels.h
 
-FORMS    += mainwindow.ui
+FORMS    += src/mainwindow.ui
 
 clang:CONFIG += c++11
 
