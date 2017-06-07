@@ -114,6 +114,9 @@
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionOpen">
+   <property name="icon">
+    <iconset theme="document-open"/>
+   </property>
    <property name="text">
     <string>&amp;Open</string>
    </property>
@@ -122,6 +125,9 @@
    </property>
   </action>
   <action name="actionSave">
+   <property name="icon">
+    <iconset theme="document-save"/>
+   </property>
    <property name="text">
     <string>&amp;Save</string>
    </property>
@@ -130,6 +136,9 @@
    </property>
   </action>
   <action name="actionUndo">
+   <property name="icon">
+    <iconset theme="edit-undo"/>
+   </property>
    <property name="text">
     <string>&amp;Undo</string>
    </property>
@@ -162,11 +171,17 @@
    </property>
   </action>
   <action name="action_About_Pixsrt">
+   <property name="icon">
+    <iconset theme="help-about"/>
+   </property>
    <property name="text">
     <string>&amp;About Pixsrt...</string>
    </property>
   </action>
   <action name="actionExit">
+   <property name="icon">
+    <iconset theme="application-exit"/>
+   </property>
    <property name="text">
     <string>E&amp;xit</string>
    </property>
