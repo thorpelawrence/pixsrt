@@ -12,4 +12,5 @@ Downloads available from the [releases page](https://github.com/thorpelawrence/p
 ### Credits
 ASDF pixel sorting algorithm: https://github.com/kimasendorf/ASDFPixelSort
 
-![](screenshots/after.png)
+![Windows](screenshots/windows.png)
+![Linux](screenshots/linux.png)
