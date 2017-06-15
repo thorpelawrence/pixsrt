@@ -2,10 +2,12 @@ language: cpp
 sudo: require
 dist: trusty
 
-matrix:
-    include:
-        - compiler: gcc
-        - compiler: clang
+compiler:
+    - gcc
+    - clang
+env:
+    - desktopintegration=""
+    - desktopintegration="-desktopintegration"
 
 before_install:
     - sudo add-apt-repository ppa:beineri/opt-qt58-trusty -y
@@ -16,6 +18,7 @@ install:
     - source /opt/qt*/bin/qt*-env.sh
 
 script:
+    - export GIT_TAG=$TRAVIS_TAG
     - if [ "$CC" == "clang" ]; then qmake -spec linux-clang PREFIX=/usr; else qmake PREFIX=/usr; fi
     - make -j$(nproc)
     - make INSTALL_ROOT=appdir install ; find appdir/
@@ -25,26 +28,18 @@ after_success:
     - chmod a+x linuxdeployqt*.AppImage
     - unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH
     - ./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -bundle-non-qt-libs
-    - cp ./resources/pixsrt.desktop ./appdir
-    - cp ./resources/pixsrt.png ./appdir
-    - mkdir -p ./appdir/usr/share/icons/default/256x256/apps/
-    - cp ./resources/Pixsrt256.png ./appdir/usr/share/icons/default/256x256/apps/Pixsrt.png
-    - wget -c "https://github.com/probonopd/AppImageKit/raw/master/desktopintegration" -O ./appdir/usr/bin/pixsrt.wrapper
-    - chmod a+x ./appdir/usr/bin/pixsrt.wrapper
-    - ( cd ./appdir/ ; rm AppRun ; ln -s ./usr/bin/pixsrt.wrapper AppRun )
-    - wget -c "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
-    - chmod a+x appimagetool-x86_64.AppImage
-    - ./appimagetool-x86_64.AppImage ./appdir/
+    - if [ -z "$desktopintegration" ] ; then ./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -appimage ; fi
+    - if [ ! -z "$desktopintegration" ] ; then . deployment/appimage-desktopintegration.sh ; fi
     - find ./appdir -executable -type f -exec ldd {} \; | grep " => /usr" | cut -d " " -f 2-3 | sort | uniq
-    - mv ./Pixsrt*.AppImage ./pixsrt-${TRAVIS_TAG}-${CC}-64.AppImage
-    - curl --upload-file ./pixsrt-${TRAVIS_TAG}-${CC}-64.AppImage https://transfer.sh/pixsrt-${TRAVIS_TAG}-${CC}-64.AppImage
+    - mv ./Pixsrt*.AppImage ./pixsrt-${TRAVIS_TAG}-${CC}-64${desktopintegration}.AppImage
+    - curl --upload-file ./pixsrt-${TRAVIS_TAG}-${CC}-64${desktopintegration}.AppImage https://transfer.sh/pixsrt-${TRAVIS_TAG}-${CC}-64${desktopintegration}.AppImage
 
 deploy:
     provider: releases
     overwrite: true
     api_key:
         secure: "pP4sjXBH+r0dW3klNsfHoDv7nWjHpwNR25vdcjo0eCfhgx3l9HGmlTx7Cx4WS7G5/6ijVwuvyjr23a8XGgH9cnodkPyb8hD7UPoqqCmBGy63hPNC4A3hCHbH5aLCtQT1HWpdOFyBGrySyB1Jt89XQa2o6ib3KC9kmDwx74p0REfuR1+6tCAOyI+h4Ls1KbALxKFyry6h9EyPrx06KafHXKMhOokdbdey4PIAqGEu9AuTNnAlpsa3zUwPBe4rcPRa9DrJEYqDWCf6ejYMjl/Hw2uPIlLqXYpUAbW7zDCHSjrbqGG9pSRGQ9aplPQLILrJSAz5NV7K0MFS29rVdDY9C9q+YH91V7fmOWqSpZ4P3PLVU3m8wpIU/skkAoC7xb86eqE3KYw+ZUWiGOqSrCKvUw8tPrgPBII0fhLnoJgS03LL2qrUHL1q4i3yOu6GHKo00qWlU8R6fggxqxn9dSjKP4wjZfiqGyYiZgua2smnworIfCfk+sCufQBhxkpbtXKtNG6EXXBIG5AYNMfbVVkUM3bpY03nIfs2ATr+1968SD6cQbRQeNFuOoRnpEuO7rxzR9joM8VvUnX2qJ+iTwCcG31QVWZd8865VcbrmvEwRTvWTrN9/kf+KaANQGMBG//PgiMbulpK2OdOS7Sc7rSBjjWS0lZ0I/wtFKU8HZ8uTYs="
-    file: ./pixsrt-${TRAVIS_TAG}-${CC}-64.AppImage
+    file: ./pixsrt-${TRAVIS_TAG}-${CC}-64${desktopintegration}.AppImage
     skip_cleanup: true
     on:
         tags: true
