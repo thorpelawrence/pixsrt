@@ -3,13 +3,12 @@ sudo: require
 dist: trusty
 
 matrix:
-    include:
-        compiler:
-            - gcc
-            - clang
-        env:
-            - desktopintegration=""
-            - desktopintegration="-desktopintegration"
+    compiler:
+        - gcc
+        - clang
+    env:
+        - desktopintegration=""
+        - desktopintegration="-desktopintegration"
 
 before_install:
     - sudo add-apt-repository ppa:beineri/opt-qt58-trusty -y
