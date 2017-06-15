@@ -12,14 +12,10 @@ TARGET = pixsrt
 TEMPLATE = app
 
 TAG = "0.0.0"
-APPVEYOR_TAG = $$(APPVEYOR_REPO_TAG_NAME)
-TRAVIS_TAG = $$(TRAVIS_TAG)
+GIT_TAG = $$(GIT_TAG)
 
-!isEmpty(APPVEYOR_TAG) {
-    TAG = $$APPVEYOR_TAG
-}
-!isEmpty(TRAVIS_TAG) {
-    TAG = $$TRAVIS_TAG
+!isEmpty(GIT_TAG) {
+    TAG = $$GIT_TAG
 }
 
 DEFINES += TAG=\\\"$$TAG\\\"
