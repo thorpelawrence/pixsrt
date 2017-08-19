@@ -2,5 +2,6 @@
 Type=Application
 Name=Pixsrt
 Comment=Pixel sorter
+Categories=Graphics
 Exec=pixsrt
 Icon=pixsrt
