@@ -41,8 +41,7 @@ void MainWindow::updateProgress(int progress) {
 
 void MainWindow::showImage(QImage image) {
     this->image = image;
-    if (scene)
-        delete scene;
+    delete scene;
     scene = new QGraphicsScene(ui->graphicsView);
     scene->addPixmap(QPixmap::fromImage(image));
     ui->graphicsView->setScene(scene);
