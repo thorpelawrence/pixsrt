@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QIcon::setThemeName("oxygen");
 #endif
     ui->setupUi(this);
+    scene = nullptr;
     ui->actionUndo->setEnabled(false);
 }
 
@@ -40,7 +41,8 @@ void MainWindow::updateProgress(int progress) {
 
 void MainWindow::showImage(QImage image) {
     this->image = image;
-    //delete scene;
+    if (scene)
+        delete scene;
     scene = new QGraphicsScene(ui->graphicsView);
     scene->addPixmap(QPixmap::fromImage(image));
     ui->graphicsView->setScene(scene);
