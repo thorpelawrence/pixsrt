@@ -3,11 +3,11 @@ image: Visual Studio 2015
 environment:
   matrix:
     - BUILD: msvc2015
-      QTDIR: C:\Qt\5.8\msvc2015
+      QTDIR: C:\Qt\5.10.1\msvc2015
     - BUILD: msvc2015_64
-      QTDIR: C:\Qt\5.8\msvc2015_64
+      QTDIR: C:\Qt\5.10.1\msvc2015_64
     - BUILD: mingw53_32
-      QTDIR: C:\Qt\5.8\mingw53_32
+      QTDIR: C:\Qt\5.10.1\mingw53_32
 
 before_build:
   - if "%BUILD%" == "msvc2015" call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"
