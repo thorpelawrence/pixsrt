@@ -57,7 +57,7 @@ private:
 
     void showImage(QImage);
 
-    void loadImage(QUrl fileName);
+    void loadImage(QString fileName);
 
     void sortPixels(sortpixels::Mode);
 
