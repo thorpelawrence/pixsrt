@@ -53,7 +53,7 @@ void MainWindow::dragEnterEvent(QDragEnterEvent *event)
 
 void MainWindow::dropEvent(QDropEvent *event)
 {
-    loadImage(event->mimeData()->urls()[0].path());
+    loadImage(event->mimeData()->urls()[0].toLocalFile());
     event-> acceptProposedAction();
 }
 
