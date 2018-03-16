@@ -1,6 +1,9 @@
 #include "ui_mainwindow.h"
 #include "mainwindow.h"
 
+#include <QDragEnterEvent>
+#include <QImage>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -11,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     scene = nullptr;
     ui->actionUndo->setEnabled(false);
+    setAcceptDrops(true);
 }
 
 MainWindow::~MainWindow()
@@ -34,6 +38,30 @@ void MainWindow::on_actionOpen_triggered()
     ui->statusBar->showMessage("Image loaded");
     showImage(image);
 }
+
+void MainWindow::dragEnterEvent(QDragEnterEvent *event)
+{
+    if(event->mimeData()->hasUrls())
+    {
+        event->acceptProposedAction();
+    }
+}
+
+void MainWindow::dropEvent(QDropEvent *event)
+{
+    QList<QUrl> droppedUrls = event->mimeData()->urls();
+    int droppedUrlCnt = droppedUrls.size();
+    for(int i = 0; i <droppedUrlCnt; i++)
+    {
+        QString localPath = droppedUrls[i].toLocalFile();
+        QFileInfo fileInfo(localPath);
+        QImage img(localPath);
+        showImage(img);
+    }
+    event-> acceptProposedAction();
+}
+
+
 
 void MainWindow::updateProgress(int progress) {
     ui->statusBar->showMessage(QString("Progress: %1%").arg(progress));
