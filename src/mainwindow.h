@@ -18,7 +18,6 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
@@ -27,7 +26,6 @@ public slots:
     void handleFinished();
 
     void updateProgress(int);
-
 
 private slots:
     void on_actionOpen_triggered();
@@ -70,7 +68,6 @@ private:
     sortpixels *pixelSort;
     QFuture<void> future;
     QFutureWatcher<void> watcher;
-
 };
 
 #endif // MAINWINDOW_H
