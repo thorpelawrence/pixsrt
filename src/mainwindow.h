@@ -17,9 +17,11 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
 
 public slots:
     void handleFinished();
@@ -47,6 +49,12 @@ private slots:
 
     void on_actionAbout_Licenses_triggered();
 
+    void dragEnterEvent(QDragEnterEvent *event);
+
+    void dropEvent(QDropEvent *event);
+
+
+
 private:
     Ui::MainWindow *ui;
 
@@ -61,6 +69,7 @@ private:
     sortpixels *pixelSort;
     QFuture<void> future;
     QFutureWatcher<void> watcher;
+
 };
 
 #endif // MAINWINDOW_H
