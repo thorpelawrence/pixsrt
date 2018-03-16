@@ -21,18 +21,16 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionOpen_triggered()
 {
-
     QString fileName = QFileDialog::getOpenFileName(this, "Open Image", nullptr,
                                             "Image files (*.jpg *.jpeg *.png)");
     loadImage(fileName);
-
 }
 
 
-void MainWindow::loadImage(QUrl fileName)
+void MainWindow::loadImage(QString fileName)
 {
-    this->fileName = fileName.path();
-    if (!image.load(fileName.path())) {
+    this->fileName = fileName;
+    if (!image.load(fileName)) {
         ui->statusBar->showMessage("Invalid image");
         return;
     }
