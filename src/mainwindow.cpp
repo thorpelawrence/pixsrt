@@ -1,9 +1,6 @@
 #include "ui_mainwindow.h"
 #include "mainwindow.h"
 
-#include <QDragEnterEvent>
-#include <QImage>
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -24,9 +21,18 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionOpen_triggered()
 {
-    fileName = QFileDialog::getOpenFileName(this, "Open Image", nullptr,
+
+    QString fileName = QFileDialog::getOpenFileName(this, "Open Image", nullptr,
                                             "Image files (*.jpg *.jpeg *.png)");
-    if (!image.load(fileName)) {
+    loadImage(fileName);
+
+}
+
+
+void MainWindow::loadImage(QUrl fileName)
+{
+    this->fileName = fileName.path();
+    if (!image.load(fileName.path())) {
         ui->statusBar->showMessage("Invalid image");
         return;
     }
@@ -49,19 +55,9 @@ void MainWindow::dragEnterEvent(QDragEnterEvent *event)
 
 void MainWindow::dropEvent(QDropEvent *event)
 {
-    QList<QUrl> droppedUrls = event->mimeData()->urls();
-    int droppedUrlCnt = droppedUrls.size();
-    for(int i = 0; i <droppedUrlCnt; i++)
-    {
-        QString localPath = droppedUrls[i].toLocalFile();
-        QFileInfo fileInfo(localPath);
-        QImage img(localPath);
-        showImage(img);
-    }
+    loadImage(event->mimeData()->urls()[0].path());
     event-> acceptProposedAction();
 }
-
-
 
 void MainWindow::updateProgress(int progress) {
     ui->statusBar->showMessage(QString("Progress: %1%").arg(progress));

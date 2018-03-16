@@ -7,6 +7,7 @@
 #include <QFuture>
 #include <QtConcurrent/QtConcurrent>
 #include <QMessageBox>
+#include <QDragEnterEvent>
 #include "sortpixels.h"
 
 namespace Ui {
@@ -22,11 +23,11 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-
 public slots:
     void handleFinished();
 
     void updateProgress(int);
+
 
 private slots:
     void on_actionOpen_triggered();
@@ -53,12 +54,12 @@ private slots:
 
     void dropEvent(QDropEvent *event);
 
-
-
 private:
     Ui::MainWindow *ui;
 
     void showImage(QImage);
+
+    void loadImage(QUrl fileName);
 
     void sortPixels(sortpixels::Mode);
 
