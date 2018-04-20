@@ -3,12 +3,12 @@ language: cpp
 matrix:
     include:
         - os: linux
-        sudo: require
-        env:
+          sudo: require
+          env:
             - desktopintegration=""
             - desktopintegration="-desktopintegration"
-        dist: trusty
-        addons:
+          dist: trusty
+          addons:
             apt:
                 packages:
                     - qt510base: 'ppa:beineri/opt-qt-5.10.1-trusty'
@@ -33,6 +33,7 @@ script:
 
 after_success:
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then . deployment/linuxdeployqt.sh; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then macdeployqt
 
 deploy:
     provider: releases
