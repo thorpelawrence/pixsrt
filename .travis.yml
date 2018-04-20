@@ -1,45 +1,46 @@
 language: cpp
-sudo: require
-dist: trusty
+
+matrix:
+    include:
+        - os: linux
+        sudo: require
+        env:
+            - desktopintegration=""
+            - desktopintegration="-desktopintegration"
+        dist: trusty
+        addons:
+            apt:
+                packages:
+                    - qt510base: 'ppa:beineri/opt-qt-5.10.1-trusty'
+        - os: osx
 
 compiler:
     - gcc
     - clang
-env:
-    - desktopintegration=""
-    - desktopintegration="-desktopintegration"
 
 before_install:
-    - sudo add-apt-repository ppa:beineri/opt-qt-5.10.1-trusty -y
-    - sudo apt-get update -qq
-    
-install: 
-    - sudo apt-get -y install qt510base
-    - source /opt/qt*/bin/qt*-env.sh
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install qt; fi
+
+install:
+    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then source /opt/qt*/bin/qt*-env.sh; fi
 
 script:
     - export GIT_TAG=$TRAVIS_TAG
-    - if [ "$CC" == "clang" ]; then qmake -spec linux-clang PREFIX=/usr; else qmake PREFIX=/usr; fi
+    - if [[ "$TRAVIS_OS_NAME" == "linux" && "$CXX" == "clang++" ]]; then qmake -spec linux-clang -config release PREFIX=/usr; else qmake -config release PREFIX=/usr; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then qmake -config release LIBS+= -dead_strip; fi
     - make -j$(nproc)
     - make INSTALL_ROOT=appdir install ; find appdir/
 
 after_success:
-    - wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" 
-    - chmod a+x linuxdeployqt*.AppImage
-    - unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH
-    - ./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -bundle-non-qt-libs
-    - if [ -z "$desktopintegration" ] ; then ./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -appimage ; fi
-    - if [ ! -z "$desktopintegration" ] ; then . deployment/appimage-desktopintegration.sh ; fi
-    - find ./appdir -executable -type f -exec ldd {} \; | grep " => /usr" | cut -d " " -f 2-3 | sort | uniq
-    - mv ./Pixsrt*.AppImage ./pixsrt-${TRAVIS_TAG}-${CC}-64${desktopintegration}.AppImage
-    - curl --upload-file ./pixsrt-${TRAVIS_TAG}-${CC}-64${desktopintegration}.AppImage https://transfer.sh/pixsrt-${TRAVIS_TAG}-${CC}-64${desktopintegration}.AppImage
+    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then . deployment/linuxdeployqt.sh; fi
 
 deploy:
     provider: releases
     overwrite: true
     api_key:
         secure: "pP4sjXBH+r0dW3klNsfHoDv7nWjHpwNR25vdcjo0eCfhgx3l9HGmlTx7Cx4WS7G5/6ijVwuvyjr23a8XGgH9cnodkPyb8hD7UPoqqCmBGy63hPNC4A3hCHbH5aLCtQT1HWpdOFyBGrySyB1Jt89XQa2o6ib3KC9kmDwx74p0REfuR1+6tCAOyI+h4Ls1KbALxKFyry6h9EyPrx06KafHXKMhOokdbdey4PIAqGEu9AuTNnAlpsa3zUwPBe4rcPRa9DrJEYqDWCf6ejYMjl/Hw2uPIlLqXYpUAbW7zDCHSjrbqGG9pSRGQ9aplPQLILrJSAz5NV7K0MFS29rVdDY9C9q+YH91V7fmOWqSpZ4P3PLVU3m8wpIU/skkAoC7xb86eqE3KYw+ZUWiGOqSrCKvUw8tPrgPBII0fhLnoJgS03LL2qrUHL1q4i3yOu6GHKo00qWlU8R6fggxqxn9dSjKP4wjZfiqGyYiZgua2smnworIfCfk+sCufQBhxkpbtXKtNG6EXXBIG5AYNMfbVVkUM3bpY03nIfs2ATr+1968SD6cQbRQeNFuOoRnpEuO7rxzR9joM8VvUnX2qJ+iTwCcG31QVWZd8865VcbrmvEwRTvWTrN9/kf+KaANQGMBG//PgiMbulpK2OdOS7Sc7rSBjjWS0lZ0I/wtFKU8HZ8uTYs="
-    file: ./pixsrt-${TRAVIS_TAG}-${CC}-64${desktopintegration}.AppImage
+    file: ./pixsrt-${TRAVIS_TAG}-${TRAVIS_OS_NAME}-64${desktopintegration}.AppImage
     skip_cleanup: true
     on:
         tags: true
+        condition: $CXX=clang++
