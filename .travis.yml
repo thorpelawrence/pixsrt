@@ -16,8 +16,7 @@ env:
 matrix:
     exclude:
         - os: osx
-          env:
-            - desktopintegration="-desktopintegration"
+          env: desktopintegration="-desktopintegration"
 
 before_install:
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo add-apt-repository ppa:beineri/opt-qt-5.10.1-trusty -y; fi
