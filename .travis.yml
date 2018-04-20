@@ -1,20 +1,23 @@
 language: cpp
+sudo: require
 
-matrix:
-    include:
-        - os: linux
-          sudo: require
-          env:
-            - desktopintegration=""
-        - os: linux
-          sudo: require
-          env:
-            - desktopintegration="-desktopintegration"
-        - os: osx
+os:
+    - linux
+    - osx
 
 compiler:
     - gcc
     - clang
+
+env:
+    - desktopintegration=""
+    - desktopintegration="-desktopintegration"
+
+matrix:
+    exclude:
+        - os: osx
+          env:
+            - desktopintegration="-desktopintegration"
 
 before_install:
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo add-apt-repository ppa:beineri/opt-qt-5.10.1-trusty -y; fi
