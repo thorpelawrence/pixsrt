@@ -37,7 +37,9 @@ script:
 
 after_success:
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then . deployment/linuxdeployqt.sh; fi
-    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then macdeployqt
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then macdeployqt ./appdir/usr/local/bin/pixsrt.app; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then mv ./Pixsrt*.app ./pixsrt-${TRAVIS_TAG}-macos-64.app; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then curl --upload-file ./pixsrt-${TRAVIS_TAG}-macos-64.app https://transfer.sh/pixsrt-${TRAVIS_TAG}-${CXX}-64.app; fi
 
 deploy:
     provider: releases
