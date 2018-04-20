@@ -10,8 +10,10 @@ matrix:
           dist: trusty
           addons:
             apt:
-                packages:
+                sources:
                     - qt510base: 'ppa:beineri/opt-qt-5.10.1-trusty'
+                packages:
+                    - qt510base
         - os: osx
 
 compiler:
