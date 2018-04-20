@@ -24,7 +24,7 @@ before_install:
 install:
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get -y install qt510base; fi
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then source /opt/qt*/bin/qt*-env.sh; fi
-    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link qt; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link qt --force; fi
 
 script:
     - export GIT_TAG=$TRAVIS_TAG
