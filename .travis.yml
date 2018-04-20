@@ -6,8 +6,10 @@ matrix:
           sudo: require
           env:
             - desktopintegration=""
+        - os: linux
+          sudo: require
+          env:
             - desktopintegration="-desktopintegration"
-          dist: trusty
         - os: osx
 
 compiler:
