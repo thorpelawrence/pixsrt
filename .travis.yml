@@ -30,7 +30,7 @@ install:
 
 script:
     - export GIT_TAG=$TRAVIS_TAG
-    - if [[ "$TRAVIS_OS_NAME == "linux" ]]; then if [[ "$CXX" == "clang++" ]]; then qmake -spec linux-clang -config release PREFIX=/usr; else qmake -config release PREFIX=/usr; fi; fi
+    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then if [[ "$CXX" == "clang++" ]]; then qmake -spec linux-clang -config release PREFIX=/usr; else qmake -config release PREFIX=/usr; fi; fi
     - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then qmake -config release; fi
     - make -j$(nproc)
     - make INSTALL_ROOT=appdir install ; find appdir/
