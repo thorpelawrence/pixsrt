@@ -32,7 +32,8 @@ deploy:
   provider: GitHub
   auth_token:
     secure: XHnnMTnDQkbvkyDieJI/yTD3BiPUsTLyI2SolnlWmjO/5EguoGSe9YgtHs1VCvQh
-  artifact: pixsrt-%APPVEYOR_REPO_TAG_NAME%-win-64.zip
+  name: pixsrt-%APPVEYOR_REPO_TAG_NAME%-win-64.zip
+  artifact: pixsrt-%APPVEYOR_REPO_TAG_NAME%-%BUILD%.zip
   on:
     appveyor_repo_tag: true
     BUILD: msvc2015_64
