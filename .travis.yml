@@ -41,12 +41,16 @@ after_success:
     - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then mv ./pixsrt.app ./pixsrt-${TRAVIS_TAG}-macos-64.app; fi
     - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then curl --upload-file ./pixsrt-${TRAVIS_TAG}-macos-64.app https://transfer.sh/pixsrt-${TRAVIS_TAG}-${CXX}-64.app; fi
 
+before_deploy:
+    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export DEPLOY_FILE=pixsrt-${TRAVIS_TAG}-linux-64${desktopintegration}.AppImage; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export DEPLOY_FILE=pixsrt-${TRAVIS_TAG}-macos-64.app; fi
+
 deploy:
     provider: releases
     overwrite: true
     api_key:
         secure: "pP4sjXBH+r0dW3klNsfHoDv7nWjHpwNR25vdcjo0eCfhgx3l9HGmlTx7Cx4WS7G5/6ijVwuvyjr23a8XGgH9cnodkPyb8hD7UPoqqCmBGy63hPNC4A3hCHbH5aLCtQT1HWpdOFyBGrySyB1Jt89XQa2o6ib3KC9kmDwx74p0REfuR1+6tCAOyI+h4Ls1KbALxKFyry6h9EyPrx06KafHXKMhOokdbdey4PIAqGEu9AuTNnAlpsa3zUwPBe4rcPRa9DrJEYqDWCf6ejYMjl/Hw2uPIlLqXYpUAbW7zDCHSjrbqGG9pSRGQ9aplPQLILrJSAz5NV7K0MFS29rVdDY9C9q+YH91V7fmOWqSpZ4P3PLVU3m8wpIU/skkAoC7xb86eqE3KYw+ZUWiGOqSrCKvUw8tPrgPBII0fhLnoJgS03LL2qrUHL1q4i3yOu6GHKo00qWlU8R6fggxqxn9dSjKP4wjZfiqGyYiZgua2smnworIfCfk+sCufQBhxkpbtXKtNG6EXXBIG5AYNMfbVVkUM3bpY03nIfs2ATr+1968SD6cQbRQeNFuOoRnpEuO7rxzR9joM8VvUnX2qJ+iTwCcG31QVWZd8865VcbrmvEwRTvWTrN9/kf+KaANQGMBG//PgiMbulpK2OdOS7Sc7rSBjjWS0lZ0I/wtFKU8HZ8uTYs="
-    file: ./pixsrt-${TRAVIS_TAG}-${TRAVIS_OS_NAME}-64${desktopintegration}.{AppImage,app}
+    file: $DEPLOY_FILE
     skip_cleanup: true
     on:
         tags: true
