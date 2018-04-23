@@ -17,13 +17,17 @@ before_build:
   
 build_script:
   - set GIT_TAG=%APPVEYOR_REPO_TAG_NAME%
-  - qmake pixsrt.pro
+  - qmake -config release
   - IF NOT "%BUILD%" == "mingw53_32" (jom) ELSE (mingw32-make)
+  - IF NOT "%BUILD%" == "mingw53_32" (jom clean) ELSE (mingw32-make clean)
   - windeployqt .\release\pixsrt.exe
 
 after_build:
   - 7z a pixsrt-%APPVEYOR_REPO_TAG_NAME%-%BUILD%.zip .\release\*
   - appveyor PushArtifact pixsrt-%APPVEYOR_REPO_TAG_NAME%-%BUILD%.zip
+
+before_deploy:
+  - if %BUILD% == "msvc2015_64" rename pixsrt-%APPVEYOR_REPO_TAG_NAME%-%BUILD%.zip pixsrt-%APPVEYOR_REPO_TAG_NAME%-win-64.zip
 
 deploy:
   force_update: true
@@ -32,8 +36,7 @@ deploy:
   provider: GitHub
   auth_token:
     secure: XHnnMTnDQkbvkyDieJI/yTD3BiPUsTLyI2SolnlWmjO/5EguoGSe9YgtHs1VCvQh
-  name: pixsrt-%APPVEYOR_REPO_TAG_NAME%-win-64.zip
-  artifact: pixsrt-%APPVEYOR_REPO_TAG_NAME%-%BUILD%.zip
+  artifact: pixsrt-%APPVEYOR_REPO_TAG_NAME%-win-64.zip
   on:
     appveyor_repo_tag: true
     BUILD: msvc2015_64
