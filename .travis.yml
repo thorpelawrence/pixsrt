@@ -42,8 +42,8 @@ after_success:
     - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then curl --upload-file ./pixsrt-${TRAVIS_TAG}-macos-64.app https://transfer.sh/pixsrt-${TRAVIS_TAG}-${CXX}-64.app; fi
 
 before_deploy:
-    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export DEPLOY_FILE=pixsrt-${TRAVIS_TAG}-linux-64${desktopintegration}.AppImage; fi
-    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export DEPLOY_FILE=pixsrt-${TRAVIS_TAG}-macos-64.app; fi
+    - if [[ "$TRAVIS_OS_NAME" == "linux" && "$CXX" == "clang++" ]]; then export DEPLOY_FILE=pixsrt-${TRAVIS_TAG}-linux-64${desktopintegration}.AppImage; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" && "$CXX" == "clang++" ]]; then export DEPLOY_FILE=pixsrt-${TRAVIS_TAG}-macos-64.app; fi
 
 deploy:
     provider: releases
