@@ -17,7 +17,7 @@ before_build:
   
 build_script:
   - set GIT_TAG=%APPVEYOR_REPO_TAG_NAME%
-  - qmake pixsrt.pro
+  - qmake -config release
   - IF NOT "%BUILD%" == "mingw53_32" (jom) ELSE (mingw32-make)
   - IF NOT "%BUILD%" == "mingw53_32" (jom clean) ELSE (mingw32-make clean)
   - windeployqt .\release\pixsrt.exe
