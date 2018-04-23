@@ -21,7 +21,7 @@ matrix:
 before_install:
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo add-apt-repository ppa:beineri/opt-qt-5.10.1-trusty -y; fi
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -qq; fi
-    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install qt@5.10.1; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install qt; fi
 
 install:
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get -y install qt510base; fi
