@@ -37,13 +37,13 @@ script:
 
 after_success:
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then . deployment/linuxdeployqt.sh; fi
-    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then macdeployqt ./pixsrt.app; fi
-    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then mv ./pixsrt.app ./pixsrt-${TRAVIS_TAG}-macos-64.app; fi
-    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then curl --upload-file ./pixsrt-${TRAVIS_TAG}-macos-64.app https://transfer.sh/pixsrt-${TRAVIS_TAG}-${CXX}-64.app; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then macdeployqt ./pixsrt.app -dmg; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then mv ./pixsrt.dmg ./pixsrt-${TRAVIS_TAG}-macos-64.dmg; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then curl --upload-file ./pixsrt-${TRAVIS_TAG}-macos-64.dmg https://transfer.sh/pixsrt-${TRAVIS_TAG}-${CXX}-64.dmg; fi
 
 before_deploy:
     - if [[ "$TRAVIS_OS_NAME" == "linux" && "$CXX" == "clang++" ]]; then export DEPLOY_FILE=pixsrt-${TRAVIS_TAG}-linux-64${desktopintegration}.AppImage; fi
-    - if [[ "$TRAVIS_OS_NAME" == "osx" && "$CXX" == "clang++" ]]; then export DEPLOY_FILE=pixsrt-${TRAVIS_TAG}-macos-64.app; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" && "$CXX" == "clang++" ]]; then export DEPLOY_FILE=pixsrt-${TRAVIS_TAG}-macos-64.dmg; fi
 
 deploy:
     provider: releases
