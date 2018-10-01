@@ -8,8 +8,11 @@ class sortpixels : public QObject
     Q_OBJECT
 
 public:
-    enum Mode {
-        Horizontal, Vertical, ASDF
+    enum Mode
+    {
+        Horizontal,
+        Vertical,
+        ASDF
     };
 
     sortpixels(Mode, QImage*, double, int);
